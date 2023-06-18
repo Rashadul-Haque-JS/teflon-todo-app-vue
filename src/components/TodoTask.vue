@@ -28,6 +28,7 @@ export default {
       let classes = ["toggle"];
       if (this.task.done) {
         classes.push("toggle-done");
+       return window.location.reload();
       }
       return classes;
     },
@@ -51,7 +52,7 @@ export default {
   padding: 12px 0px;
   background-color: #b6b3b3e5;
   list-style-type: none;
-  margin: 5px 0px;
+  margin: 5px 10px;
   font-family: "Titillium Web", sans-serif;
   font-weight: 600;
 }

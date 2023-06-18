@@ -1,15 +1,17 @@
 <template>
   <div>
-    <TodoTask
-      v-for="(task, index) in arr"
-      :key="task.id"
-      :task="task"
-      :index="index"
-      @delete="deleteItem(index)"
-    />
+    <div class="task-wrapper">
+      <TodoTask
+        v-for="(task, index) in arr"
+        :key="task.id"
+        :task="task"
+        :index="index"
+        @delete="deleteItem(index)"
+      />
+    </div>
     <div class="add-to-list">
-      <input type="text" v-model="task" />
-      <button class="btn" @click="addTask">Lägg till todo</button>
+      <input type="text" v-model="task" class="task-input" placeholder="Skriv ny todo" />
+      <button class="btn" @click="addTask">LÄGG TILL TODO</button>
     </div>
   </div>
 </template>
@@ -23,7 +25,6 @@ export default {
     };
   },
   name: "todoList",
-
   props: ["arr"],
   components: {
     TodoTask,
@@ -40,14 +41,11 @@ export default {
   methods: {
     addTask() {
       this.arr.push(this.add);
+      this.task = ""; // Clear the input field after adding the task
     },
-
     deleteItem(index) {
       this.$emit("deleteIt", index);
     },
-    //  isDone(){
-    //      this.$emit('done')
-    //  }
   },
 };
 </script>
@@ -55,21 +53,39 @@ export default {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;600;700&display=swap");
 
+.task-wrapper {
+  min-height: 100px;
+  max-height: 140px;
+  overflow-y: auto;
+}
 .add-to-list {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin: 20px 10px;  
 }
 
-input[type="text"],
-.btn {
-  padding: 18px 0px;
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: "Titillium Web", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 10px;
 }
+
 .btn {
-  background-color: #000;
+  padding: 10px 20px;
+  background-color: #337ab7;
   color: #fff;
   font-family: "Titillium Web", sans-serif;
   font-size: 1rem;
   font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #23527c;
 }
 </style>
